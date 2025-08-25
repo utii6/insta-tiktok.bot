@@ -151,11 +151,17 @@ app_telegram.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_fl
 # -------------------------
 fastapi_app = FastAPI()
 
+# -------------------------
+# FastAPI Webhook
+# -------------------------
+fastapi_app = FastAPI()
+
 WEBHOOK_PATH = f"/webhook/{BOT_TOKEN}"
-WEBHOOK_URL = f"https://YOUR-RENDER-APP-NAME.onrender.com{WEBHOOK_PATH}"
+WEBHOOK_URL = f"https://insta-tiktok-bot.onrender.com{WEBHOOK_PATH}"
 
 @fastapi_app.on_event("startup")
 async def startup():
+    # ضبط الـ Webhook عند تشغيل البوت
     await app_telegram.bot.set_webhook(WEBHOOK_URL)
     logging.info(f"Webhook set to {WEBHOOK_URL}")
 
